@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            {% if game_details.Game_name_x == game_details.Game_name_x %}
+            {{ game_details.Game_name_x }}
+            {% elif game_details.Game_name_y == game_details.Game_name_y %}
+            {{ game_details.Game_name_y }}
+            {% elif game_details.Game_name == game_details.Game_name %}
+            {{ game_details.Game_name }}
+            {% endif %}
+            - Games finder
+        </title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <div>
+                {% if game_details.Game_name_x == game_details.Game_name_x %}
+                <h1 class="display-4"><span>{{ game_details.Game_name_x }}</span></h1>
+                {% elif game_details.Game_name_y == game_details.Game_name_y %}
+                <h1 class="display-4"><span>{{ game_details.Game_name_y }}</span></h1>
+                {% elif game_details.Game_name == game_details.Game_name %}
+                <h1 class="display-4"><span>{{ game_details.Game_name }}</span></h1>
+                {% endif %}
+            </div>
+            <div class="col-md-* col-xl-*">
+                <div class="card bg-white text-dark order-card">
+                    <div class="card-block">
+                        <div>
+                            <h6 class="m-b-20"><b>Summaries</b></h6>
+                            {% if game_details.Summary_x == game_details.Summary_x %}
+                            <p class="m-b-0">Summary [Metacritic]<span class="f-right">{{ game_details.Summary_x }}</span></p>
+                            {% endif %}
+                            {% if game_details.Summary_y == game_details.Summary_y %}
+                            <p class="m-b-0">Summary [IGN]<span class="f-right">{{ game_details.Summary_y }}</span></p>
+                            {% endif %}
+                            {% if game_details.Description == game_details.Description %}
+                            <p class="m-b-0">Description [GOG]<span class="f-right">{{ game_details.Description }}</span></p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-xl-3">
+                    <div class="card bg-white text-dark order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20"><b>Scores</b></h6>
+                            {% if game_details.Meta_score == game_details.Meta_score %}
+                            <p class="m-b-0">Meta score [Metacritic]<span class="f-right">{{ game_details.Meta_score }}</span>
+                            </p>
+                            {% endif %}
+                            {% if game_details.User_score_x == game_details.User_score_x %}
+                            <p class="m-b-0">User score [Metacritic]<span class="f-right">{{ game_details.User_score_x }}</span>
+                            </p>
+                            {% endif %}
+                            {% if game_details.Ign_score == game_details.Ign_score %}
+                            <p class="m-b-0">Ign score [IGN]<span class="f-right">{{ game_details.Ign_score }}</span></p>
+                            {% endif %}
+                            {% if game_details.User_score_y == game_details.User_score_y %}
+                            <p class="m-b-0">User score [IGN]<span class="f-right">{{ game_details.User_score_y }}</span></p>
+                            {% endif %}
+                            {% if game_details.Score == game_details.Score %}
+                            <p class="m-b-0">Score [GOG]<span class="f-right">{{ game_details.Score }}</span></p>
+                            {% endif %}
+                            {% if game_details.OpenCritic_average == game_details.OpenCritic_average %}
+                            <p class="m-b-0">OpenCritic average [GOG]<span
+                                    class="f-right">{{ game_details.OpenCritic_average }}</span></p>
+                            {% endif %}
+                            {% if game_details.OpenCritic_recommended == game_details.OpenCritic_recommended %}
+                            <p class="m-b-0">OpenCritic recommended [GOG]<span class="f-right">{{ game_details.OpenCritic_recommended }}</span>
+                            </p>
+                            {% endif %}
+                            {% if nota_media == nota_media %}
+                            <p class="m-b-0">Average score<span class="f-right">{{ average_score }}</span></p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xl-3">
+                    <div class="card bg-white text-dark order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20"><b>Release Date</b></h6>
+                            {% if game_details.Release_date_x == game_details.Release_date_x %}
+                            <p class="m-b-0">[Metacritic]<span id="release-date-meta" class="f-right">{{ game_details.Release_date_x }}</span>
+                            </p>
+                            {% endif %}
+                            {% if game_details.Initial_release == game_details.Initial_release %}
+                            <p class="m-b-0">[IGN]<span class="f-right">{{ game_details.Initial_release }}</span></p>
+                            {% endif %}
+                            {% if game_details.Release_date_y == game_details.Release_date_y %}
+                            <p class="m-b-0">[GOG]<span id="release-date-gog"
+                                                        class="f-right">{{ game_details.Release_date_y }}</span></p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xl-3">
+                    <div class="card bg-white text-dark order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20"><b>Platforms</b></h6>
+                            {% if game_details.Platforms_x == game_details.Platforms_x %}
+                            <p class="m-b-0">[Metacritic]<span class="f-right">{{ game_details.Platforms_x }}</span></p>
+                            {% endif %}
+                            {% if game_details.Platforms_y == game_details.Platforms_y %}
+                            <p class="m-b-0">[IGN]<span class="f-right">{{ game_details.Platforms_y }}</span></p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xl-3">
+                    <div class="card bg-white text-dark order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20"><b>Developers</b></h6>
+                            {% if game_details.Developer_x == game_details.Developer_x %}
+                            <p class="m-b-0">[Metacritic]<span class="f-right">{{ game_details.Developer_x }}</span></p>
+                            {% endif %}
+                            {% if game_details.Developer_y == game_details.Developer_y %}
+                            <p class="m-b-0">[IGN]<span class="f-right">{{ game_details.Developer_y }}</span></p>
+                            {% endif %}
+                            {% if game_details.Company == game_details.Company %}
+                            <p class="m-b-0">[GOG]<span class="f-right">{{ game_details.Company }}</span></p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xl-3">
+                    <div class="card bg-white text-dark order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20"><b>Publishers</b></h6>
+                            {% if game_details.Publisher_x == game_details.Publisher_x %}
+                            <p class="m-b-0">[Metacritic]<span id="publisher-meta" class="f-right">{{ game_details.Publisher_x }}</span>
+                            </p>
+                            {% endif %}
+                            {% if game_details.Publisher_y == game_details.Publisher_y %}
+                            <p class="m-b-0">[IGN]<span class="f-right">{{ game_details.Publisher_y }}</span></p>
+                            {% endif %}
+                            {% if game_details.Company == game_details.Company %}
+                            <p class="m-b-0">[GOG]<span class="f-right">{{ game_details.Company }}</span></p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xl-3">
+                    <div class="card bg-white text-dark order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20"><b>Genres</b></h6>
+                            {% if game_details.Genres_x == game_details.Genres_x %}
+                            <p class="m-b-0">[Metacritic]<span class="f-right">{{ game_details.Genres_x }}</span></p>
+                            {% endif %}
+                            {% if game_details.Genres_y == game_details.Genres_y %}
+                            <p class="m-b-0">[IGN]<span class="f-right">{{ game_details.Genres_y }}</span></p>
+                            {% endif %}
+                            {% if game_details.Genre == game_details.Genre %}
+                            <p class="m-b-0">[GOG]<span class="f-right">{{ game_details.Genre }}</span></p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xl-3">
+                    <div class="card bg-white text-dark order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20"><b>Ratings</b></h6>
+                            {% if game_details.Rating_x == game_details.Rating_x %}
+                            <p class="m-b-0">Rating [Metacritic]<span class="f-right">{{ game_details.Rating_x }}</span></p>
+                            {% endif %}
+                            {% if game_details.Age_rating == game_details.Age_rating %}
+                            <p class="m-b-0">Age rating [IGN]<span class="f-right">{{ game_details.Age_rating }}</span></p>
+                            {% endif %}
+                            {% if game_details.Content_ratings_info == game_details.Content_ratings_info %}
+                            <p class="m-b-0">Content ratings info [IGN]<span class="f-right">{{ game_details.Content_ratings_info }}</span>
+                            </p>
+                            {% endif %}
+                            {% if game_details.Rating_y == game_details.Rating_y %}
+                            <p class="m-b-0">Rating [GOG]<span class="f-right">{{ game_details.Rating_y }}</span></p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xl-3">
+                    <div class="card bg-white text-dark order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20"><b>Features</b></h6>
+                            {% if game_details.Features == game_details.Features %}
+                            <p class="m-b-0">Features [IGN]<span class="f-right">{{ game_details.Features }}</span></p>
+                            {% endif %}
+                            {% if game_details.Game_features == game_details.Game_features %}
+                            <p class="m-b-0">Game features [GOG]<span class="f-right">{{ game_details.Game_features }}</span>
+                            </p>
+                            {% endif %}
+                            {% if game_details.Tag == game_details.Tag %}
+                            <p class="m-b-0">Tag [GOG]<span class="f-right">{{ game_details.Tag }}</span></p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xl-3">
+                    <div class="card bg-white text-dark order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20"><b>HowLongToBeat</b></h6>
+                            {% if game_details.Main_story_hours == game_details.Main_story_hours %}
+                            <p class="m-b-0">Main story hours [IGN]<span
+                                    class="f-right">{{ game_details.Main_story_hours }}</span></p>
+                            {% endif %}
+                            {% if game_details.Story_sides_hours == game_details.Story_sides_hours %}
+                            <p class="m-b-0">Story sides hours [IGN]<span
+                                    class="f-right">{{ game_details.Story_sides_hours }}</span></p>
+                            {% endif %}
+                            {% if game_details.Everything_hours == game_details.Everything_hours %}
+                            <p class="m-b-0">Everything hours [IGN]<span
+                                    class="f-right">{{ game_details.Everything_hours }}</span></p>
+                            {% endif %}
+                            {% if game_details.All_styles_hours == game_details.All_styles_hours %}
+                            <p class="m-b-0">All styles hours [IGN]<span
+                                    class="f-right">{{ game_details.All_styles_hours }}</span></p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xl-3">
+                    <div class="card bg-white text-dark order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20"><b>Scrape Dates</b></h6>
+                            {% if game_details.Scrape_date_x == game_details.Scrape_date_x %}
+                            <p class="m-b-0">Scrape date [Metacritic]<span
+                                    class="f-right">{{ game_details.Scrape_date_x }}</span></p>
+                            {% endif %}
+                            {% if game_details.Scrape_date_y == game_details.Scrape_date_y %}
+                            <p class="m-b-0">Scrape date [IGN]<span class="f-right">{{ game_details.Scrape_date_y }}</span></p>
+                            {% endif %}
+                            {% if game_details.Scrape_date == game_details.Scrape_date %}
+                            <p class="m-b-0">Scrape date [GOG]<span class="f-right">{{ game_details.Scrape_date }}</span></p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-xl-6">
+                    <div class="card bg-white text-dark order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-12"><b>URLs</b></h6>
+                            {% if game_details.URL_x == game_details.URL_x %}
+                            <p class="m-b-0">URL [Metacritic]<a class="f-right" href="{{ game_details.URL_x }}">{{ game_details.URL_x }}</a></p>
+                            {% endif %}
+                            {% if game_details.URL_y == game_details.URL_y %}
+                            <p class="m-b-0">URL [IGN]<a class="f-right" href="{{ game_details.URL_y }}">{{ game_details.URL_y }}</a></p>
+                            {% endif %}
+                            {% if game_details.URL == game_details.URL %}
+                            <p class="m-b-0">URL [GOG]<a class="f-right" href="{{ game_details.URL }}">{{ game_details.URL }}</a></p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-xl-6">
+                    <div class="card bg-white text-dark order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20"><b>System Requirements</b></h6>
+                            {% if game_details.Works_on == game_details.Works_on %}
+                            <p class="m-b-0">Works on [GOG]<span class="f-right">{{ game_details.Works_on }}</span></p>
+                            {% endif %}
+                            {% if game_details.Requirements == game_details.Requirements %}
+                            <p class="m-b-0">Requirements [GOG]<span class="f-right">{{ game_details.Requirements }}</span></p>
+                            {% endif %}
+                            {% if game_details.Size == game_details.Size %}
+                            <p class="m-b-0">Size [GOG]<span class="f-right">{{ game_details.Size }}</span></p>
+                            {% endif %}
+                            {% if game_details.Audio_languages == game_details.Audio_languages %}
+                            <p class="m-b-0">Audio languages [GOG]<span
+                                    class="f-right">{{ game_details.Audio_languages }}</span></p>
+                            {% endif %}
+                            {% if game_details.Text_languages == game_details.Text_languages %}
+                            <p class="m-b-0">Text languages [GOG]<span class="f-right">{{ game_details.Text_languages }}</span>
+                            </p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-xl-6">
+                    <div class="card bg-white text-dark order-card">
+                        <div class="card-block">
+                            <div>
+                                <h6 class="m-b-20"><b>Other Categories</b></h6>
+                                {% if game_details.Franchise == game_details.Franchise %}
+                                <p class="m-b-0">Franchise [IGN]<span class="f-right">{{ game_details.Franchise }}</span></p>
+                                {% endif %}
+                                {% if game_details.Price == game_details.Price %}
+                                <p class="m-b-0">Price [GOG]<span class="f-right">{{ game_details.Price }}</span></p>
+                                {% endif %}
+                                {% if game_details.Link == game_details.Link %}
+                                <p class="m-b-0">Link [GOG]<a class="f-right" href="{{ game_details.URL }}">{{ game_details.Link }}</a></p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                if (document.getElementById('release-date-gog') != null) {
+                    const releaseDateGog = document.getElementById('release-date-gog').innerText.split("'")[1];
+                    document.getElementById('release-date-gog').textContent = formatDate(releaseDateGog);
+
+                    function formatDate(dateString) {
+                        const date = new Date(dateString);
+                        const options = {month: 'short', day: 'numeric', year: 'numeric'};
+                        return date.toLocaleDateString('en-US', options);
+                    }
+                }
+
+                if (!document.getElementById('release-date-meta').innerText.includes(', ')) {
+                    const releaseDateMeta = document.getElementById('release-date-meta').textContent;
+                    document.getElementById('publisher-meta').textContent = "['" + releaseDateMeta + "']";
+                    document.getElementById('release-date-meta').textContent = null;
+                }
+            });
+        </script>
+    </body>
+</html>

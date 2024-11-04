@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="referrer" content="no-referrer">
+        <title>Games finder</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    </head>
+    <body>
+        <div class="container mt-5">
+            <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="post" role="form">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Search Options:</span>
+                    </div>
+                    <label for="search-type"></label>
+                    <select class="form-control mr-sm-2" id="search-type" name="search-type">
+                        <option value="s-all-columns">All columns</option>
+                        <option value="s-game-name">Game name</option>
+                        <option value="s-genre">Genre</option>
+                        <option value="s-developer-publisher">Developer/Publisher</option>
+                        <option value="s-release-year">Release year</option>
+                    </select>
+                    <label for="search"></label>
+                    <input class="form-control mr-sm-2" type="text" id="search" name="search">
+                    <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+                </div>
+            </form>
+        </div>
+        <div class="container mt-4">
+            {% if dtframe_lines > 0 %}
+            <p class="alert alert-dark" role="alert">
+                <strong>{{ dtframe_lines }} games found!</strong>
+            </p>
+            {% else %}
+            <p class="alert alert-dark" role="alert">
+                <strong> No games found for this search criteria!</strong>
+            </p>
+            {% endif %}
+        </div>
+        <div class="container mt-5">
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>Game name</th>
+                    <th>Scores</th>
+                    <th>Release date</th>
+                    <th>Genres</th>
+                    <th>Developer/Publisher</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for row in page_obj %}
+                <tr>
+                    {% if row.Game_name_x == row.Game_name_x %}
+                    <td><a href="{% url 'game_details' primary_key=row.PK %}"> {{ row.Game_name_x }} </a></td>
+                    {% else %}
+                    <td><a href="{% url 'game_details' primary_key=row.PK %}"> {{ row.Game_name }} </a></td>
+                    </td>
+                    {% endif %}
+                    <td>
+                        {% if row.Meta_score == row.Meta_score %}
+                        | <i>Meta</i>: <b>[{{ row.Meta_score }}]</b> |
+                        {% endif %}
+                        {% if row.Ign_score == row.Ign_score %}
+                        | <i>IGN</i>: <b>[{{ row.Ign_score }}]</b> |
+                        {% endif %}
+                        {% if row.Score == row.Score %}
+                        | <i>GOG</i>: <b>[{{ row.Score}}]</b> |
+                        {% endif %}
+                    </td>
+                    <td class="release-dates">
+                        {% if row.Release_date_x == row.Release_date_x %}
+                        {{ row.Release_date_x }}
+                        {% elif row.Release_date_y == row.Release_date_y %}
+                        {{ row.Release_date_y }}
+                        {% elif row.Release_date == row.Release_date %}
+                        {{ row.Release_date }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if row.Genres_x == row.Genres_x %}
+                        {{ row.Genres_x }}
+                        {% endif %}
+                        {% if row.Genres_y == row.Genres_y %}
+                        {{ row.Genres_y }}
+                        {% endif %}
+                        {% if row.Genre == row.Genre %}
+                        {{ row.Genre }}
+                        {% endif %}
+                    </td>
+                    <td class="developers-publishers">
+                        {% if row.Company == row.Company %}
+                        {{ row.Company }}
+                        {% elif row.Developer_x == row.Developer_x %}
+                        {{ row.Developer_x }} {{ row.Publisher_x }}
+                        {% elif row.Developer_y == row.Developer_y %}
+                        {{ row.Developer_y }} {{ row.Publisher_y }}
+                        {% endif %}
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="container mt-4">
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
+                        <a class="page-link" href="?page=1" {% if not page_obj.has_previous %} tabindex="-1"
+                           aria-disabled="true" {% endif %}>&laquo; First</a>
+                    </li>
+                    {% if page_obj.number > 1 %}
+                    <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" {% if not page_obj.has_previous %}
+                           tabindex="-1" aria-disabled="true" {% endif %}>Previous</a>
+                    </li>
+                    {% endif %}
+                    <li class="page-item disabled"><span class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                    </li>
+                    {% if page_obj.number != page_obj.paginator.num_pages %}
+                    <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" {% if not page_obj.has_next %}
+                           tabindex="-1" aria-disabled="true" {% endif %}>Next</a>
+                    </li>
+                    {% endif %}
+                    <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" {% if not page_obj.has_next %}
+                           tabindex="-1" aria-disabled="true" {% endif %}>Last &raquo;</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded',
+                function () {
+                    const releaseDatesRow = document.querySelectorAll('.release-dates');
+                    let devPubRow = document.querySelectorAll('.developers-publishers')
+
+                    for (let i = 0; i < releaseDatesRow.length; i++) {
+                        const cell = releaseDatesRow[i];
+                        const cell_aux = devPubRow[i];
+
+                        if (cell.innerText.includes('{')) {
+                            const releaseDateGog = cell.innerText.split("'")[1];
+                            const date = new Date(releaseDateGog);
+                            const options = {month: 'short', day: 'numeric', year: 'numeric'};
+                            cell.textContent = date.toLocaleDateString('en-US', options);
+                        } else if (!cell.innerText.includes(', ')) {
+                            cell_aux.textContent = cell_aux.textContent.replace("[]", "['" + cell.textContent + "']")
+                            cell.textContent = null;
+                        }
+                    }
+                });
+        </script>
+    </body>
+</html>
